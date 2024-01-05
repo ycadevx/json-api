@@ -14,8 +14,7 @@ type APIServer struct {
 	store      Storage
 }
 
-func NewAPIServer(listenAddr string) *APIServer {
-
+func NewAPIServer(listenAddr string, store Storage) *APIServer {
 	return &APIServer{
 		listenAddr: listenAddr,
 		store:      store,
@@ -59,28 +58,28 @@ func (s *APIServer) handleGetAccount(w http.ResponseWriter, r *http.Request) err
 }
 
 func (s *APIServer) handleCreateAccount(w http.ResponseWriter, r *http.Request) error {
+	return nil
+	// createAccountReq := new(CreateAccountRequest)
 
-	createAccountReq := new(CreateAccountRequest)
+	// if err := json.NewDecoder(r.Body).Decode(createAccountReq); err != nil {
+	// 	return err
+	// }
 
-	if err := json.NewDecoder(r.Body).Decode(createAccountReq); err != nil {
-		return err
-	}
+	// account := NewAccount(createAccountReq.FirstName, createAccountReq.LastName)
+	// if err := s.store.CreateAccount(account); err != nil {
+	// 	return err
+	// }
 
-	account := NewAccount(createAccountReq.FirstName, createAccountReq.LastName)
-	if err := s.store.CreateAccount(account); err != nil {
-		return err
-	}
-
-	return WriteJSON(w, http.StatusOK, account)
+	// return WriteJSON(w, http.StatusOK, account)
 }
 
 func (s *APIServer) handleDeleteccount(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func (s *APIServer) handleTransfer(w http.ResponseWriter, r *http.Request) error {
+/* func (s *APIServer) handleTransfer(w http.ResponseWriter, r *http.Request) error {
 	return nil
-}
+} */
 
 func WriteJSON(w http.ResponseWriter, status int, v any) error {
 	w.Header().Add("Content-Type", "application/json")
